@@ -25,6 +25,7 @@ export default function Main() {
         value={value} 
         options={options} 
         onChange={value => setValue(value)}
+        allowClear={true}
         style={{ width: '200px' }}
       />
       <Select 

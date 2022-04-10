@@ -30,7 +30,7 @@ export interface SelectProps<T> {
   /** 改变已选值 */
   onChange?: (value?: T, option?: SelectOption<T>) => void
   /** 允许清除 */
-  clear?: boolean
+  allowClear?: boolean
   /** 禁止修改 */
   disabled?: boolean
 }
@@ -45,7 +45,7 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
   placeholder,
   value,
   onChange,
-  clear,
+  allowClear,
   disabled
 }, ref) => {
   const [visible, setVisible] = useState<boolean>(false)
@@ -93,7 +93,8 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
       <div
         className={cn(styles.select, {
           [styles.active]: visible,
-          [styles.disabled]: disabled
+          [styles.disabled]: disabled,
+          [styles.allowClear]: allowClear && !disabled && _option
         })}
       >
         <div className={cn(styles.block, styles.label)}>
@@ -107,7 +108,7 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
             </div>
           )}
         </div>
-        {clear && !disabled && _option && (
+        {allowClear && !disabled && _option && (
           <div 
             className={cn(styles.block, styles.icon, styles.clear)}
             onClick={event => {

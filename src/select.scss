@@ -49,47 +49,52 @@
   }
   .clear {
     display: none;
+    &:hover {
+      color: var(--alpha2);
+    }
   }
-  &:hover {
-    border-color: var(--alpha3);
-    .icon {
-      color: var(--alpha3);
+}
+
+.select {
+  &:hover, &.active {
+    border-color: var(--main2);
+    .arrow {
+      display: none;
     }
     .clear {
       display: flex;
     }
   }
   &.active {
-    border-color: var(--main2);
     background-color: var(--back2);
-    .icon {
-      color: var(--main2);
-    }
-    .clear {
-      display: flex;
-    }
+    box-shadow: 0 0 4px var(--main4);
   }
   &.disabled {
+    border-color: var(--alpha4);
     background-color: var(--beta5);
-    cursor: default;
+    cursor: not-allowed;
   }
 }
 
 .options {
   width: 100%;
+  color: var(--font);
   font-size: 14px;
   line-height: 1.5;
+  font-weight: 400;
   .option {
     padding: 5px 8px;
-    &.active {
-      background: var(--main5);
-    }
+    cursor: pointer;
     &:hover {
-      background: var(--main4);
+      background-color: var(--beta5);
+    }
+    &.active {
+      background-color: var(--main5);
     }
     &.disabled {
-      background: var(--beta5);
-      cursor: default;
+      background-color: transparent;
+      color: var(--font2);
+      cursor: not-allowed;
     }
   }
 }
