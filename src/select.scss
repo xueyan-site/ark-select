@@ -1,19 +1,26 @@
-.select {
+@import "./common.scss";
+
+.xrselectcontent {
+  background-color: $background-color;
+  max-height: 240px;
+}
+
+.xrselect {
   width: 100%;
   height: 32px;
+  padding: 0 8px;
+  cursor: pointer;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
   position: relative;
-  color: var(--font);
+  color: $font-color;
   font-size: 14px;
   line-height: 1.5;
   font-weight: 400;
-  padding: 0 8px;
-  cursor: pointer;
-  border: 1px solid var(--alpha4);
+  border: 1px solid $border-color;
+  -webkit-tap-highlight-color: transparent;
   .block {
     &:not(:first-child) {
       margin-left: 7px;
@@ -28,7 +35,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  .labelText {
+  .labeltext {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
@@ -37,7 +44,7 @@
       outline: none;
     }
     &.placeholder {
-      color: var(--font2);
+      color: $disabled-font-color;
     }
   }
   .icon {
@@ -45,56 +52,35 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--alpha4);
+    color: $disabled-font-color;
   }
   .clear {
     display: none;
     &:hover {
-      color: var(--alpha2);
+      color: $active-font-color;
     }
   }
-}
-
-.select {
-  &:hover, &.active {
-    border-color: var(--main2);
-    .arrow {
-      display: none;
+  &.allowclear {
+    &:hover, &.active {
+      .arrow {
+        display: none;
+      }
+      .clear {
+        display: flex;
+      }
     }
-    .clear {
-      display: flex;
-    }
+  }
+  &:hover {
+    border-color: $hover-border-color;
   }
   &.active {
-    background-color: var(--back2);
+    border-color: $active-border-color;
     box-shadow: 0 0 4px var(--main4);
+    background-color: $background-color;
   }
   &.disabled {
-    border-color: var(--alpha4);
-    background-color: var(--beta5);
+    border-color: $disabled-border-color;
+    background-color: $disabled-background-color;
     cursor: not-allowed;
-  }
-}
-
-.options {
-  width: 100%;
-  color: var(--font);
-  font-size: 14px;
-  line-height: 1.5;
-  font-weight: 400;
-  .option {
-    padding: 5px 8px;
-    cursor: pointer;
-    &:hover {
-      background-color: var(--beta5);
-    }
-    &.active {
-      background-color: var(--main5);
-    }
-    &.disabled {
-      background-color: transparent;
-      color: var(--font2);
-      cursor: not-allowed;
-    }
   }
 }

@@ -1,9 +1,10 @@
 import React, { forwardRef, useState } from 'react'
 import cn from 'classnames'
 import { DirectionIcon, CloseIcon } from 'xueyan-react-icon'
-import { BubblePopover, PopoverRef } from 'xueyan-react-popover'
+import { Popover, PopoverRef } from 'xueyan-react-popover'
 import styles from './select.scss'
-import type { BubblePopoverProps } from 'xueyan-react-popover'
+import { BoxSelect } from './box-select'
+import type { PopoverProps } from 'xueyan-react-popover'
 
 export interface SelectOption<T> extends Record<string, any> {
   /** 选项展示信息 */
@@ -16,7 +17,7 @@ export interface SelectOption<T> extends Record<string, any> {
 
 export interface SelectProps<T> {
   /** popover组件props */
-  popover?: BubblePopoverProps
+  popover?: PopoverProps
   /** 类名 */
   className?: string
   /** 样式 */
@@ -29,6 +30,8 @@ export interface SelectProps<T> {
   value?: T
   /** 改变已选值 */
   onChange?: (value?: T, option?: SelectOption<T>) => void
+  /** 点击项 */
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value: T, option: SelectOption<T>) => void
   /** 允许清除 */
   allowClear?: boolean
   /** 禁止修改 */
@@ -45,6 +48,7 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
   placeholder,
   value,
   onChange,
+  onClick,
   allowClear,
   disabled
 }, ref) => {
@@ -53,57 +57,51 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
   const _option = _options.find(i => i.value === value)
 
   return (
-    <BubblePopover
+    <Popover
       keepStyle={1}
       {...popover}
       ref={ref}
       placement='y'
-      hiddenArrow={true}
       value={visible}
       disabled={disabled || _options.length <= 0}
       onChange={setVisible}
       className={className}
       style={style}
-      contentStyle={{
-        padding: 0,
-        borderRadius: 0,
-        ...(popover?.contentStyle)
-      }}
       content={(
-        <div className={styles.options}>
-          {_options.map((item, index) => (
-            <div 
-              key={index} 
-              className={cn(styles.option, {
-                [styles.active]: item.value === value,
-                [styles.disabled]: item.disabled
-              })}
-              onClick={event => {
-                event.stopPropagation()
-                if (!item.disabled && onChange) {
-                  onChange(item.value, item)
-                  setVisible(false)
-                }
-              }}
-            >{item.label}</div>
-          ))}
-        </div>
+        <BoxSelect 
+          value={value}
+          options={options}
+          vertical={true}
+          className={styles.xrselectcontent}
+          onClick={(event, value, option) => {
+            event.stopPropagation()
+            if (onClick) {
+              onClick(event, value, option)
+            }
+          }}
+          onChange={(value, option) => {
+            if (onChange) {
+              setVisible(false)
+              onChange(value, option)
+            }
+          }}
+        />
       )}
     >
       <div
-        className={cn(styles.select, {
+        className={cn(styles.xrselect, {
           [styles.active]: visible,
           [styles.disabled]: disabled,
-          [styles.allowClear]: allowClear && !disabled && _option
+          [styles.allowclear]: allowClear && !disabled && _option
         })}
       >
         <div className={cn(styles.block, styles.label)}>
           {_option ? (
-            <div className={styles.labelText}>
+            <div className={styles.labeltext}>
               {_option.label}
             </div>
           ) : (
-            <div className={cn(styles.labelText, styles.placeholder)}>
+            <div className={cn(styles.labeltext, styles.placeholder)}>
               {placeholder || '请选择'}
             </div>
           )}
@@ -128,6 +126,6 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
           </div>
         )}
       </div>
-    </BubblePopover>
+    </Popover>
   )
 })

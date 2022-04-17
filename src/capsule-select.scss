@@ -1,0 +1,101 @@
+@import "./common.scss";
+
+.xrcapsuleselect {
+  box-sizing: border-box;
+  .item {
+    cursor: pointer;
+    color: $font-color;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+    padding: 5px 8px;
+    border: 1px solid $border-color;
+    -webkit-tap-highlight-color: transparent;
+    &:hover {
+      border: 1px solid $hover-border-color;
+      background-color: $hover-background-color;
+    }
+    &.active {
+      color: $active-font-color;
+      border: 1px solid $active-border-color;
+      background-color: $active-background-color;
+    }
+    &.disabled {
+      color: $disabled-font-color;
+      border-color: $disabled-border-color;
+      background-color: $disabled-background-color;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.xrcapsuleselect.horizontal {
+  display: flex;
+  width: fit-content;
+  .item {
+    border-right-width: 0;
+    white-space: nowrap;
+    &:last-child {
+      border-right-width: 1px;
+    }
+    &:hover {
+      border-width: 1px;
+      + .item {
+        border-left-width: 0;
+      }
+      &.disabled {
+        border-right-width: 0;
+        &:last-child {
+          border-right-width: 1px;
+        }
+        + .item {
+          border-left-width: 1px;
+        }
+      }
+    }
+    &.active {
+      border-width: 1px;
+      + .item {
+        border-left-width: 0;
+      }
+    }
+    &.disabled {
+      border-color: $disabled-border-color;
+    }
+  }
+}
+
+.xrcapsuleselect.vertical {
+  display: block;
+  width: 100%;
+  .item {
+    border-bottom-width: 0;
+    &:last-child {
+      border-bottom-width: 1px;
+    }
+    &:hover {
+      border-width: 1px;
+      + .item {
+        border-top-width: 0;
+      }
+      &.disabled {
+        border-bottom-width: 0;
+        &:last-child {
+          border-bottom-width: 1px;
+        }
+        + .item {
+          border-top-width: 1px;
+        }
+      }
+    }
+    &.active {
+      border-width: 1px;
+      + .item {
+        border-top-width: 0;
+      }
+    }
+    &.disabled {
+      border-color: $disabled-border-color;
+    }
+  }
+}

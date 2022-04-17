@@ -5,9 +5,19 @@ import type { ArticleMeta } from 'xueyan-react-doc'
 
 const CONTENTS: ArticleMeta[] = [
   {
-    id: 'intro',
-    label: 'Introduction',
-    content: () => import('./intro')
+    id: 'select',
+    label: 'select',
+    content: () => import('./select')
+  },
+  {
+    id: 'box-select',
+    label: 'box-select',
+    content: () => import('./box-select')
+  },
+  {
+    id: 'capsule-select',
+    label: 'capsule-select',
+    content: () => import('./capsule-select')
   }
 ]
 

@@ -50,7 +50,7 @@ export default function PageDoc({ page, ...other }: PageDocProps) {
       avatar={AVATAR}
       logos={LOGOS}
       languages={LANGUAGES}
-      article={query.article || 'intro'}
+      article={query.article || 'select'}
       onChange={node => {
         router.changeUrl(path, {
           ...query,
