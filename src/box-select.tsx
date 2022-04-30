@@ -11,23 +11,34 @@ export interface BoxSelectOption<T> extends Record<string, any> {
   disabled?: boolean
 }
 
+export type BoxSelectOnChange<T> = (
+  value?: T, 
+  option?: BoxSelectOption<T>
+) => void
+
+export type BoxSelectOnClick<T> = (
+  event: React.MouseEvent<HTMLDivElement, MouseEvent>, 
+  value: T, 
+  option: BoxSelectOption<T>
+) => void
+
 export interface BoxSelectProps<T> {
   /** 类名 */
   className?: string
   /** 样式 */
   style?: React.CSSProperties
-  /** 选项 */
-  options?: BoxSelectOption<T>[]
   /** 已选值 */
   value?: T
-  /** 改变已选值 */
-  onChange?: (value?: T, option?: BoxSelectOption<T>) => void
-  /** 点击项 */
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value: T, option: BoxSelectOption<T>) => void
+  /** 选项 */
+  options?: BoxSelectOption<T>[]
   /** 禁止修改 */
   disabled?: boolean
   /** 竖着放置 */
   vertical?: boolean
+  /** 改变已选值 */
+  onChange?: BoxSelectOnChange<T>
+  /** 点击项 */
+  onClick?: BoxSelectOnClick<T>
 }
 
 export interface BoxSelectRef {

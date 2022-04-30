@@ -11,23 +11,34 @@ export interface CapsuleSelectOption<T> extends Record<string, any> {
   disabled?: boolean
 }
 
+export type CapsuleSelectOnChange<T> = (
+  value?: T, 
+  option?: CapsuleSelectOption<T>
+) => void
+
+export type CapsuleSelectOnClick<T> = (
+  event: React.MouseEvent<HTMLDivElement, MouseEvent>, 
+  value: T, 
+  option: CapsuleSelectOption<T>
+) => void
+
 export interface CapsuleSelectProps<T> {
   /** 类名 */
   className?: string
   /** 样式 */
   style?: React.CSSProperties
-  /** 选项 */
-  options?: CapsuleSelectOption<T>[]
   /** 已选值 */
   value?: T
-  /** 改变已选值 */
-  onChange?: (value?: T, option?: CapsuleSelectOption<T>) => void
-  /** 点击项 */
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value: T, option: CapsuleSelectOption<T>) => void
+  /** 选项 */
+  options?: CapsuleSelectOption<T>[]
   /** 禁止修改 */
   disabled?: boolean
   /** 竖着放置 */
   vertical?: boolean
+  /** 改变已选值 */
+  onChange?: CapsuleSelectOnChange<T>
+  /** 点击项 */
+  onClick?: CapsuleSelectOnClick<T>
 }
 
 export interface CapsuleSelectRef {

@@ -15,6 +15,17 @@ export interface SelectOption<T> extends Record<string, any> {
   disabled?: boolean
 }
 
+export type SelectOnChange<T> = (
+  value?: T, 
+  option?: SelectOption<T>
+) => void
+
+export type SelectOnClick<T> = (
+  event: React.MouseEvent<HTMLDivElement, MouseEvent>, 
+  value: T, 
+  option: SelectOption<T>
+) => void
+
 export interface SelectProps<T> {
   /** popover组件props */
   popover?: PopoverProps
@@ -22,20 +33,20 @@ export interface SelectProps<T> {
   className?: string
   /** 样式 */
   style?: React.CSSProperties
-  /** 选项 */
-  options?: SelectOption<T>[]
-  /** 输入框提示 */
-  placeholder?: string
   /** 已选值 */
   value?: T
-  /** 改变已选值 */
-  onChange?: (value?: T, option?: SelectOption<T>) => void
-  /** 点击项 */
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value: T, option: SelectOption<T>) => void
-  /** 允许清除 */
-  allowClear?: boolean
+  /** 选项 */
+  options?: SelectOption<T>[]
   /** 禁止修改 */
   disabled?: boolean
+  /** 输入框提示 */
+  placeholder?: string
+  /** 允许清除 */
+  allowClear?: boolean
+  /** 改变已选值 */
+  onChange?: SelectOnChange<T>
+  /** 点击项 */
+  onClick?: SelectOnClick<T>
 }
 
 export interface SelectRef extends PopoverRef {}
