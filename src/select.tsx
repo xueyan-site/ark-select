@@ -33,6 +33,10 @@ export interface SelectProps<T> {
   className?: string
   /** 样式 */
   style?: React.CSSProperties
+  /** 类名 */
+  contentClassName?: string
+  /** 样式 */
+  contentStyle?: React.CSSProperties
   /** 已选值 */
   value?: T
   /** 选项 */
@@ -55,6 +59,8 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
   popover,
   className,
   style,
+  contentClassName,
+  contentStyle,
   options,
   placeholder,
   value,
@@ -83,7 +89,8 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
           value={value}
           options={options}
           vertical={true}
-          className={styles.xrselectcontent}
+          style={contentStyle}
+          className={cn(contentClassName, styles.xrselectcontent)}
           onClick={(event, value, option) => {
             event.stopPropagation()
             if (onClick) {
