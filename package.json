@@ -28,8 +28,8 @@
   "dependencies": {
     "@babel/runtime": "^7.12.0",
     "xueyan-react-icon": "^1.1.2",
-    "xueyan-react-popover": "^1.3.1",
-    "xueyan-react-style": "^2.0.1"
+    "xueyan-react-popover": "^1.3.2",
+    "xueyan-react-style": "^2.0.2"
   },
   "peerDependencies": {
     "classnames": "^2.3.0",
