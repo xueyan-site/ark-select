@@ -12,14 +12,18 @@ export interface CapsuleSelectOption<T> extends Record<string, any> {
 }
 
 export type CapsuleSelectOnChange<T> = (
-  value?: T, 
-  option?: CapsuleSelectOption<T>
+  value: T, 
+  option: CapsuleSelectOption<T>
 ) => void
 
 export type CapsuleSelectOnClick<T> = (
   event: React.MouseEvent<HTMLDivElement, MouseEvent>, 
   value: T, 
   option: CapsuleSelectOption<T>
+) => void
+
+export type CapsuleSelectOnClear = (
+  event: React.MouseEvent<HTMLDivElement, MouseEvent>
 ) => void
 
 export interface CapsuleSelectProps<T> {
@@ -39,6 +43,8 @@ export interface CapsuleSelectProps<T> {
   onChange?: CapsuleSelectOnChange<T>
   /** 点击项 */
   onClick?: CapsuleSelectOnClick<T>
+  /** 清除 */
+  onClear?: CapsuleSelectOnClear
 }
 
 export interface CapsuleSelectRef {
@@ -48,15 +54,17 @@ export interface CapsuleSelectRef {
 export const CapsuleSelect = forwardRef<CapsuleSelectRef, CapsuleSelectProps<any>>(({
   className,
   style,
-  options,
   value,
+  options,
+  vertical,
   onChange,
   onClick,
-  disabled,
-  vertical,
+  onClear,
+  ...props
 }, ref) => {
   const rootRef = useRef<HTMLDivElement>(null)
   const _options = options || []
+  const _disabled = props.disabled || !_options.find(i => !i.disabled)
 
   useImperativeHandle(ref, () => ({
     rootNode: rootRef.current
@@ -72,23 +80,29 @@ export const CapsuleSelect = forwardRef<CapsuleSelectRef, CapsuleSelectProps<any
         vertical ? styles.vertical : styles.horizontal
       )}
     >
-      {_options.map((item, index) => (
-        <div 
-          key={index} 
-          className={cn(styles.item, {
-            [styles.active]: item.value === value,
-            [styles.disabled]: disabled || item.disabled
-          })}
-          onClick={event => {
-            if (onClick) {
-              onClick(event, item.value, item)
-            }
-            if (!disabled && !item.disabled && onChange) {
-              onChange(item.value, item)
-            }
-          }}
-        >{item.label}</div>
-      ))}
+      {_options.map((item, index) => {
+        const active = item.value === value
+        const disabled = _disabled || item.disabled
+        return (
+          <div 
+            key={index} 
+            className={cn(styles.item, {
+              [styles.active]: active,
+              [styles.disabled]: disabled
+            })}
+            onClick={event => {
+              if (onClick) {
+                onClick(event, item.value, item)
+              }
+              if (!disabled && active && onClear) {
+                onClear(event)
+              } else if (!disabled && onChange) {
+                onChange(item.value, item)
+              }
+            }}
+          >{item.label}</div>
+        )
+      })}
     </div>
   )
 })

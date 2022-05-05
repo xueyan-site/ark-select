@@ -1,10 +1,10 @@
 import React, { forwardRef, useState } from 'react'
 import cn from 'classnames'
 import { DirectionIcon, CloseIcon } from 'xueyan-react-icon'
-import { Popover, PopoverRef } from 'xueyan-react-popover'
+import { Popover } from 'xueyan-react-popover'
 import styles from './select.scss'
 import { BoxSelect } from './box-select'
-import type { PopoverProps } from 'xueyan-react-popover'
+import type { PopoverRef, PopoverProps } from 'xueyan-react-popover'
 
 export interface SelectOption<T> extends Record<string, any> {
   /** 选项展示信息 */
@@ -16,14 +16,18 @@ export interface SelectOption<T> extends Record<string, any> {
 }
 
 export type SelectOnChange<T> = (
-  value?: T, 
-  option?: SelectOption<T>
+  value: T, 
+  option: SelectOption<T>
 ) => void
 
 export type SelectOnClick<T> = (
   event: React.MouseEvent<HTMLDivElement, MouseEvent>, 
   value: T, 
   option: SelectOption<T>
+) => void
+
+export type SelectOnClear = (
+  event: React.MouseEvent<HTMLDivElement, MouseEvent>
 ) => void
 
 export interface SelectProps<T> {
@@ -45,12 +49,12 @@ export interface SelectProps<T> {
   disabled?: boolean
   /** 输入框提示 */
   placeholder?: string
-  /** 允许清除 */
-  allowClear?: boolean
   /** 改变已选值 */
   onChange?: SelectOnChange<T>
   /** 点击项 */
   onClick?: SelectOnClick<T>
+  /** 清除 */
+  onClear?: SelectOnClear
 }
 
 export interface SelectRef extends PopoverRef {}
@@ -61,17 +65,19 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
   style,
   contentClassName,
   contentStyle,
+  value,
   options,
   placeholder,
-  value,
   onChange,
   onClick,
-  allowClear,
-  disabled
+  onClear,
+  ...props
 }, ref) => {
   const [visible, setVisible] = useState<boolean>(false)
   const _options = options || []
   const _option = _options.find(i => i.value === value)
+  const _disabled = props.disabled || !_options.find(i => !i.disabled)
+  const _noOptions = (_options.length - (_option ? 1 : 0)) <= 0
 
   return (
     <Popover
@@ -80,7 +86,7 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
       ref={ref}
       placement='y'
       value={visible}
-      disabled={disabled || _options.length <= 0}
+      disabled={_disabled || _noOptions}
       onChange={setVisible}
       className={className}
       style={style}
@@ -91,6 +97,7 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
           vertical={true}
           style={contentStyle}
           className={cn(contentClassName, styles.xrselectcontent)}
+          onClear={onClear}
           onClick={(event, value, option) => {
             event.stopPropagation()
             if (onClick) {
@@ -109,8 +116,8 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
       <div
         className={cn(styles.xrselect, {
           [styles.active]: visible,
-          [styles.disabled]: disabled,
-          [styles.allowclear]: allowClear && !disabled && _option
+          [styles.disabled]: _disabled,
+          [styles.allowclear]: !_disabled && _option && onClear
         })}
       >
         <div className={cn(styles.block, styles.label)}>
@@ -124,21 +131,19 @@ export const Select = forwardRef<SelectRef, SelectProps<any>>(({
             </div>
           )}
         </div>
-        {allowClear && !disabled && _option && (
+        {!_disabled && _option && onClear && (
           <div 
             className={cn(styles.block, styles.icon, styles.clear)}
             onClick={event => {
               event.stopPropagation()
-              if (onChange) {
-                onChange()
-                setVisible(false)
-              }
+              setVisible(false)
+              onClear(event)
             }}
           >
             <CloseIcon />
           </div>
         )}
-        {_options.length > 0 && (
+        {!_noOptions && (
           <div className={cn(styles.block, styles.icon, styles.arrow)}>
             <DirectionIcon direction={visible ? 'bottom' : 'top'} />
           </div>

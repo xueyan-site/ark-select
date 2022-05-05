@@ -1,33 +1,41 @@
-@import "./common.scss";
-
 .xrboxselect {
-  border: 1px solid $border-color;
+  color: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
   box-sizing: border-box;
+  border: 1px solid var(--area2);
+  background-color: var(--base1);
   &:hover {
-    border: 1px solid $hover-border-color;
+    border-color: var(--area3);
   }
   &.disabled {
-    border: 1px solid $disabled-border-color;
+    border-color: var(--area2);
   }
   .item {
     cursor: pointer;
-    color: $font-color;
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 400;
     padding: 5px 8px;
     -webkit-tap-highlight-color: transparent;
     &:hover {
-      background-color: $hover-background-color;
+      background-color: var(--main1);
     }
     &.active {
-      color: $active-font-color;
-      background-color: $active-background-color;
+      color: var(--main);
+      background-color: var(--main2);
     }
     &.disabled {
-      background-color: $disabled-background-color;
-      color: $disabled-font-color;
+      background-color: var(--area1);
+      color: var(--font2);
       cursor: not-allowed;
+      &.active {
+        color: var(--main);
+      }
+    }
+    &:only-child {
+      width: 100%;
+      &.active {
+        background-color: transparent;
+      }
     }
   }
 }
@@ -41,6 +49,10 @@
   display: block;
   width: 100%;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
   .item {
     overflow: hidden;
     white-space: nowrap;

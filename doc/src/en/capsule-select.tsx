@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { CapsuleSelect } from 'xueyan-react-select'
+import { SwitchTheme } from 'xueyan-react-style'
 
 const options = [
   {
@@ -33,12 +34,13 @@ const options = [
 export default function Main() {
   const [value, setValue] = useState<number|undefined>(3)
   return (
-    <div>
+    <div style={{ background: 'var(--base)' }}>
+      <SwitchTheme/>
       <CapsuleSelect 
         value={value}
         options={[options[0]]}
         onChange={value => setValue(value)}
-        style={{ width: '200px' }}
+        style={{ width: '200px', marginTop: '16px' }}
       />
       <CapsuleSelect 
         value={value} 

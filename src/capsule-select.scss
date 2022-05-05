@@ -1,30 +1,35 @@
-@import "./common.scss";
-
 .xrcapsuleselect {
-  box-sizing: border-box;
+  color: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: var(--base1);
   .item {
     cursor: pointer;
-    color: $font-color;
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 400;
     padding: 5px 8px;
-    border: 1px solid $border-color;
     -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    border: 1px solid var(--area2);
     &:hover {
-      border: 1px solid $hover-border-color;
-      background-color: $hover-background-color;
+      border: 1px solid var(--main4);
+      background-color: var(--main1);
     }
     &.active {
-      color: $active-font-color;
-      border: 1px solid $active-border-color;
-      background-color: $active-background-color;
+      color: var(--main);
+      border: 1px solid var(--main4);
+      background-color: var(--main2);
     }
     &.disabled {
-      color: $disabled-font-color;
-      border-color: $disabled-border-color;
-      background-color: $disabled-background-color;
+      color: var(--font2);
+      border-color: var(--area2);
+      background-color: var(--area1);
       cursor: not-allowed;
+    }
+    &:only-child {
+      width: 100%;
+      &.active {
+        background-color: transparent;
+      }
     }
   }
 }
@@ -60,7 +65,7 @@
       }
     }
     &.disabled {
-      border-color: $disabled-border-color;
+      border-color: var(--area2);
     }
   }
 }
@@ -95,7 +100,7 @@
       }
     }
     &.disabled {
-      border-color: $disabled-border-color;
+      border-color: var(--area2);
     }
   }
 }

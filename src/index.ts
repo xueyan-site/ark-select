@@ -9,19 +9,22 @@ export type {
   SelectProps, 
   SelectOption, 
   SelectOnChange, 
-  SelectOnClick 
+  SelectOnClick,
+  SelectOnClear
 } from './select'
 export type { 
   BoxSelectRef, 
   BoxSelectProps, 
   BoxSelectOption, 
   BoxSelectOnChange, 
-  BoxSelectOnClick 
+  BoxSelectOnClick,
+  BoxSelectOnClear
 } from './box-select'
 export type { 
   CapsuleSelectRef, 
   CapsuleSelectProps, 
   CapsuleSelectOption, 
   CapsuleSelectOnChange, 
-  CapsuleSelectOnClick 
+  CapsuleSelectOnClick,
+  CapsuleSelectOnClear
 } from './capsule-select'
