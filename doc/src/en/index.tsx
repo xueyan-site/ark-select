@@ -1,26 +1,32 @@
 import React from 'react'
-import Doc from 'com/doc'
+import { PageDoc } from 'com/page-doc'
+import pkg from '../../../package.json'
 import type { PageProps } from 'xueyan-react'
-import type { ArticleMeta } from 'xueyan-react-doc'
+import type { Collection } from 'xueyan-react-doc'
 
-const CONTENTS: ArticleMeta[] = [
+const COLLECTIONS: Collection<string,string>[] = [
   {
-    id: 'select',
-    label: 'select',
-    content: () => import('./select')
-  },
-  {
-    id: 'box-select',
-    label: 'box-select',
-    content: () => import('./box-select')
-  },
-  {
-    id: 'capsule-select',
-    label: 'capsule-select',
-    content: () => import('./capsule-select')
+    value: '1',
+    label: 'collection 1',
+    contents: [
+      {
+        value: '1-1',
+        label: 'chapter 1: introduction',
+        content: () => import('./0001')
+      }
+    ]
   }
 ]
 
 export default function Index(props: PageProps) {
-  return <Doc {...props} language="English" contents={CONTENTS} />
+  return (
+    <PageDoc 
+      {...props}
+      language="en"
+      version={pkg.version}
+      collections={COLLECTIONS}
+      name={pkg.name}
+      description={pkg.description}
+    />
+  )
 }
