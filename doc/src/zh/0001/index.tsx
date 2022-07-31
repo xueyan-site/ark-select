@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Article, Segment } from 'xueyan-react-markdown'
 import { Playground } from 'xueyan-react-playground'
-import { Select, BoxSelect, CapsuleSelect } from 'xueyan-react-select'
+import { Select, BoxSelect, CapsuleSelect } from 'ark-select'
 
 const MARK1 = `
 选择组件库
@@ -9,7 +9,7 @@ const MARK1 = `
 
 const CODE1 = `
 import React, { useState } from 'react'
-import { Select } from 'xueyan-react-select'
+import { Select } from 'ark-select'
 
 const options = [
   {
@@ -47,7 +47,7 @@ export default function Example() {
 
 const CODE2 = `
 import React, { useState } from 'react'
-import { BoxSelect } from 'xueyan-react-select'
+import { BoxSelect } from 'ark-select'
 
 const options = [
   {
@@ -85,7 +85,7 @@ export default function Example() {
 
 const CODE3 = `
 import React, { useState } from 'react'
-import { CapsuleSelect } from 'xueyan-react-select'
+import { CapsuleSelect } from 'ark-select'
 
 const options = [
   {

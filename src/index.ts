@@ -1,4 +1,4 @@
-import 'xueyan-react-style'
+import 'solor'
 
 export { Select } from './select'
 export { BoxSelect } from './box-select'

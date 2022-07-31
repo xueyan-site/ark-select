@@ -5,7 +5,7 @@ import { Article, Segment } from 'xueyan-react-markdown'
 import pkg from '../../../package.json'
 import type { PageProps } from 'xueyan-react'
 import type { ImageLinkProps, DocConfig } from 'xueyan-react-doc'
-import type { SelectOption } from 'xueyan-react-select'
+import type { SelectOption } from 'ark-select'
 
 const ICON: ImageLinkProps = {
   src: XT_ASSETS_PATH + 'project.png',

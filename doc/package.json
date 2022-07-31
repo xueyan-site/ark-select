@@ -1,8 +1,8 @@
 {
-  "name": "xueyan-react-select-doc",
+  "name": "ark-select-doc",
   "version": "1.0.0",
   "author": "xueyan-site <xueyan@xueyan.site>",
-  "description": "xueyan-react-select document",
+  "description": "ark-select document",
   "private": true,
   "scripts": {
     "start": "xt start",

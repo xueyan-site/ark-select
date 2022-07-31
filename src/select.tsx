@@ -1,10 +1,10 @@
 import React, { forwardRef, useState } from 'react'
 import cn from 'classnames'
-import { DirectionIcon, CloseIcon } from 'xueyan-react-icon'
-import { Popover } from 'xueyan-react-popover'
+import { DirectionIcon, CloseIcon } from 'sicon'
+import { Popover } from 'ark-popover'
 import styles from './select.scss'
 import { BoxSelect } from './box-select'
-import type { PopoverRef, PopoverProps } from 'xueyan-react-popover'
+import type { PopoverRef, PopoverProps } from 'ark-popover'
 
 export interface SelectOption<T> extends Record<string, any> {
   /** 选项展示信息 */
