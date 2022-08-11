@@ -1,6 +1,8 @@
 # ark-select
 
-Select component in a react kit
+![ark-select](https://xueyan.site/ark-select/ast/project.png)
+
+`Select` component in `a react kit`
 
 ## Document
 

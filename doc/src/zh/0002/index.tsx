@@ -1,5 +1,5 @@
 import React from 'react'
-import { Article, Segment } from 'xueyan-react-markdown'
+import { Article, Segment } from 'ark-markdown'
 
 const MARK1 = `
 普通选择器
@@ -12,7 +12,7 @@ type Select = React.ForwardRefExoticComponent<
 
 ## SelectRef
 
-继承 [PopoverRef](/xueyan-react-popover?doc=0002#popoverref) 全部属性
+继承 [PopoverRef](/ark-popover?doc=0002#popoverref) 全部属性
 
 ## SelectProps
 
@@ -31,7 +31,7 @@ type Select = React.ForwardRefExoticComponent<
 | onClick | 点击项 | \`? SelectOnClick<T>\` |  |
 | onClear | 清除 | \`? SelectOnClear\` |  |
 
-> 其他类型：[PopoverProps](/xueyan-react-popover?doc=0002#popoverprops)
+> 其他类型：[PopoverProps](/ark-popover?doc=0002#popoverprops)
 
 ## SelectOption
 
